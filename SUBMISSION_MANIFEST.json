@@ -1,0 +1,96 @@
+{
+  "checked_on": "2026-10-09",
+  "timezone": "Asia/Saigon",
+  "artifacts": [
+    {
+      "topic": "survey about efficient inference and small language models",
+      "path": "reports/survey-about-efficient-inference-and-small-language-models.md",
+      "bytes": 21115,
+      "sha256": "883e3df0e871e7b1b01525a427b56ad1bfc9db7ddb64a08b768041f461c82bbe"
+    },
+    {
+      "topic": "survey about efficient inference and small language models",
+      "path": "reports/survey-about-efficient-inference-and-small-language-models.sources.json",
+      "bytes": 5889,
+      "sha256": "22be229d73fe5ca6180cbc2dfc1e826aa343b27f70ee23187dd7522f40ebe1df"
+    },
+    {
+      "topic": "survey about efficient inference and small language models",
+      "path": "reports/survey-about-efficient-inference-and-small-language-models.meta.json",
+      "bytes": 476,
+      "sha256": "4e3ce13ca876a531eb9ebbf716af78ab971d6db65d403ea245d05d6dc9731666"
+    },
+    {
+      "topic": "survey about LLM agents and tool use",
+      "path": "reports/survey-about-llm-agents-and-tool-use.md",
+      "bytes": 22939,
+      "sha256": "ae00fc93f589ed8e246ce77fd115ce1791966af66b0959c8ae8e72ebc82a057c"
+    },
+    {
+      "topic": "survey about LLM agents and tool use",
+      "path": "reports/survey-about-llm-agents-and-tool-use.sources.json",
+      "bytes": 5209,
+      "sha256": "7dab60f17437712150ba5ccd1acd71e8d226629b8d7dfa2b37772c16de756ce3"
+    },
+    {
+      "topic": "survey about LLM agents and tool use",
+      "path": "reports/survey-about-llm-agents-and-tool-use.meta.json",
+      "bytes": 469,
+      "sha256": "de3d20861a7a7657393f3e5f0e8d03026f3d5e1fc536e5b2c5c1d3165f52c859"
+    },
+    {
+      "topic": "survey about reinforcement learning for LLM reasoning",
+      "path": "reports/survey-about-reinforcement-learning-for-llm-reasoning.md",
+      "bytes": 21669,
+      "sha256": "0645fac739112cbc848244047e83987700afbfbb07d5598a1cd36040c822edad"
+    },
+    {
+      "topic": "survey about reinforcement learning for LLM reasoning",
+      "path": "reports/survey-about-reinforcement-learning-for-llm-reasoning.sources.json",
+      "bytes": 6398,
+      "sha256": "a398e0a1463e1b159fcffede520fb4959827bb86dfc9ba3e22f31ee865c878a4"
+    },
+    {
+      "topic": "survey about reinforcement learning for LLM reasoning",
+      "path": "reports/survey-about-reinforcement-learning-for-llm-reasoning.meta.json",
+      "bytes": 485,
+      "sha256": "389968c8bd4c305ea0f13a62877243e3359ae896bb6362d9d5c0eabcef038ccb"
+    },
+    {
+      "topic": "survey about video and multimodal generation",
+      "path": "reports/survey-about-video-and-multimodal-generation.md",
+      "bytes": 20443,
+      "sha256": "48d870eae0e51c960f4930bc86a1c220e7c1fa892bdd7d6b847bd44a0f255828"
+    },
+    {
+      "topic": "survey about video and multimodal generation",
+      "path": "reports/survey-about-video-and-multimodal-generation.sources.json",
+      "bytes": 6002,
+      "sha256": "07bc76591533ca00f05bc7d77e02e89941e9cd0306d629fd62040dfd7b4fb62d"
+    },
+    {
+      "topic": "survey about video and multimodal generation",
+      "path": "reports/survey-about-video-and-multimodal-generation.meta.json",
+      "bytes": 493,
+      "sha256": "bf136b1919c4a75a328770e0e39bbde624afbf17dd186a4836ecf8e85d611930"
+    },
+    {
+      "topic": "survey about world model",
+      "path": "reports/survey-about-world-model.md",
+      "bytes": 28047,
+      "sha256": "e41ec4e1a8ae81752659ea8c1a1c61186d3fc541e849dfe58fc4d790140c2b97"
+    },
+    {
+      "topic": "survey about world model",
+      "path": "reports/survey-about-world-model.sources.json",
+      "bytes": 10264,
+      "sha256": "41e89a8fc3028c258b4b1af756b96883b87b27995466532d9543645c98b48ac4"
+    },
+    {
+      "topic": "survey about world model",
+      "path": "reports/survey-about-world-model.meta.json",
+      "bytes": 473,
+      "sha256": "fc5e8331e0ef123ad593c0ed966ccfa209b3031ee6bb099db749f97ef8972570"
+    }
+  ]
+}

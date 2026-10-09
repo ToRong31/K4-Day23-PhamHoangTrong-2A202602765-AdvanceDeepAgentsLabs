@@ -1,0 +1,170 @@
+[
+  {
+    "n": 1,
+    "id": "2205.00445",
+    "url": "https://arxiv.org/abs/2205.00445",
+    "title": "MRKL Systems: A modular, neuro-symbolic architecture that combines large language models, external knowledge sources and discrete reasoning",
+    "date": "2022-05-01",
+    "source": "arxiv"
+  },
+  {
+    "n": 2,
+    "id": "2302.04761",
+    "url": "https://arxiv.org/abs/2302.04761",
+    "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+    "date": "2023-02-09",
+    "source": "arxiv"
+  },
+  {
+    "n": 3,
+    "id": "2210.03629",
+    "url": "https://arxiv.org/abs/2210.03629",
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "date": "2023-03-10",
+    "source": "web"
+  },
+  {
+    "n": 4,
+    "id": "2211.10435",
+    "url": "https://arxiv.org/abs/2211.10435",
+    "title": "PAL: Program-aided Language Models",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 5,
+    "id": "2307.16789",
+    "url": "https://arxiv.org/abs/2307.16789",
+    "title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+    "date": "2023-07-31",
+    "source": "arxiv"
+  },
+  {
+    "n": 6,
+    "id": "2408.08435",
+    "url": "https://arxiv.org/abs/2408.08435",
+    "title": "Automated Design of Agentic Systems",
+    "date": "2024-08-15",
+    "source": "arxiv"
+  },
+  {
+    "n": 7,
+    "id": "2609.04894",
+    "url": "https://arxiv.org/abs/2609.04894",
+    "title": "From Language Models to World-Acting Systems: Progress and Limits of Agentic AI across Digital, Social, Virtual, and Physical Environments",
+    "date": "2026-09-04",
+    "source": "arxiv"
+  },
+  {
+    "n": 8,
+    "id": "2508.07575",
+    "url": "https://huggingface.co/papers/2508.07575",
+    "title": "MCPToolBench++: A Large Scale AI Agent Model Context Protocol MCP Tool Use Benchmark",
+    "date": "2025-08-11",
+    "source": "hf-search"
+  },
+  {
+    "n": 9,
+    "id": "2309.17452",
+    "url": "https://arxiv.org/abs/2309.17452",
+    "title": "ToRA: A Tool-Integrated Reasoning Agent for Mathematical Problem Solving",
+    "date": "2023-09-29",
+    "source": "arxiv"
+  },
+  {
+    "n": 10,
+    "id": "2503.09516",
+    "url": "https://arxiv.org/abs/2503.09516",
+    "title": "Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning",
+    "date": "2025-03-12",
+    "source": "arxiv"
+  },
+  {
+    "n": 11,
+    "id": "2504.13958",
+    "url": "https://arxiv.org/abs/2504.13958",
+    "title": "ToolRL: Reward is All Tool Learning Needs",
+    "date": "2025-04-16",
+    "source": "arxiv"
+  },
+  {
+    "n": 12,
+    "id": "2509.14480",
+    "url": "https://huggingface.co/papers/2509.14480",
+    "title": "Process-Supervised Reinforcement Learning for Interactive Multimodal Tool-Use Agents",
+    "date": "2025-09-17",
+    "source": "hf-search"
+  },
+  {
+    "n": 13,
+    "id": "https://gorilla.cs.berkeley.edu/blogs/13_bfcl_v3_multi_turn.html",
+    "url": "https://gorilla.cs.berkeley.edu/blogs/13_bfcl_v3_multi_turn.html",
+    "title": "The Berkeley Function Calling Leaderboard (BFCL): From Tool Use to Agentic Evaluation of Large Language Models",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 14,
+    "id": "2406.12045",
+    "url": "https://arxiv.org/abs/2406.12045",
+    "title": "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+    "date": "unknown",
+    "source": "arxiv"
+  },
+  {
+    "n": 15,
+    "id": "2609.40284",
+    "url": "https://arxiv.org/abs/2609.40284",
+    "title": "cua-speedrun: Standardized Benchmarking of the Speed of Computer-Use Agents",
+    "date": "2026-09-30",
+    "source": "arxiv"
+  },
+  {
+    "n": 16,
+    "id": "2610.08215",
+    "url": "https://huggingface.co/papers/2610.08215",
+    "title": "Learn2Play Bench: How Well Do LLM Agents Learn from Experience in Unfamiliar Environments?",
+    "date": "2026-10-07",
+    "source": "hf-daily"
+  },
+  {
+    "n": 17,
+    "id": "https://www.usenix.org/system/files/usenixsecurity26-chang-hongyan.pdf",
+    "url": "https://www.usenix.org/system/files/usenixsecurity26-chang-hongyan.pdf",
+    "title": "Overcoming the Retrieval Barrier: Indirect Prompt Injection in the Wild for LLM Systems",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 18,
+    "id": "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/",
+    "url": "https://genai.owasp.org/llmrisk/llm062025-excessive-agency/",
+    "title": "LLM06:2025 Excessive Agency - OWASP Gen AI Security Project",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 19,
+    "id": "2503.13657",
+    "url": "https://arxiv.org/abs/2503.13657",
+    "title": "Why Do Multi-Agent LLM Systems Fail?",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 20,
+    "id": "2610.05830",
+    "url": "https://arxiv.org/abs/2610.05830",
+    "title": "Measurement-First Auditing of Agentic Leaderboards: Contamination Susceptibility, Matched-Control Re-evaluation, and Scorer Validation",
+    "date": "2026-10-05",
+    "source": "arxiv"
+  },
+  {
+    "n": 21,
+    "id": "2609.39068",
+    "url": "https://huggingface.co/papers/2609.39068",
+    "title": "SparseEngine: Sparse-First Inference Engine",
+    "date": "2026-09-30",
+    "source": "hf-daily"
+  }
+]

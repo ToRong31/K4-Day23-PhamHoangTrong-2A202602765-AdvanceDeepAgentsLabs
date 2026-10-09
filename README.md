@@ -1,109 +1,116 @@
-# Deep Research Agent (Deep Agents + Sandbox)
+# Deep Research Agent — Advanced Deep Agents Lab
 
-Lab dựng một **hệ thống deep research đa tác tử**: người dùng chỉ cần nhập một chủ đề (ví dụ `survey about world model`), hệ thống tự lập kế hoạch, giao việc cho nhiều subagent, tìm tài liệu trên arXiv, Hugging Face và web, rồi viết một **báo cáo có trích dẫn**.
+Hệ thống nghiên cứu tự động bằng Python: nhận chủ đề, giao việc cho researcher, lấy tài liệu từ arXiv/Hugging Face/web, tổng hợp survey tiếng Anh và kiểm tra trích dẫn trong sandbox trước khi xuất kết quả.
 
-Hình thức: **bài thực hành cá nhân**. Ngôn ngữ lập trình: Python 3.11 trở lên.
+**Bài cá nhân:** Phạm Hoàng Trọng — 2A202602765.
 
-## 1. Mục tiêu học tập
+## Kết quả nộp bài
 
-Sau lab, bạn có thể:
+Đã sinh đủ **5 báo cáo, 15 artifact**, tổng **141 mục nguồn** (tính theo từng báo cáo, có thể trùng giữa các chủ đề). Mỗi báo cáo có cả 4 nhãn nguồn và ít nhất 3 lần gọi `task`. `self_check.py` đạt cho cả 5 chủ đề; 27 unit test đạt.
 
-1. Dựng agent bằng thư viện Deep Agents (LangChain): công cụ (tool), system prompt, subagent, backend.
-2. Dùng **sandbox** (Daytona) làm không gian làm việc và nơi chạy mã cho agent; hiểu vì sao khóa API và công cụ mạng phải nằm ở phía host chứ không nằm trong sandbox.
-3. Viết công cụ gọi API ngoài **chịu được giới hạn tốc độ** (retry, backoff, jitter, `Retry-After`).
-4. Thiết kế quy trình đa tác tử: lead chia nhỏ câu hỏi, giao cho N researcher chạy song song, tổng hợp và kiểm tra trích dẫn.
-5. Tạo báo cáo có thể kiểm chứng: mọi khẳng định có `[n]` trỏ tới một nguồn có thật.
+| Chủ đề | Báo cáo | Nguồn | Task calls | Thời gian (phút) |
+|---|---|---:|---:|---:|
+| World models | [Survey](reports/survey-about-world-model.md) | 44 | 12 | 16.3 |
+| RL for LLM reasoning | [Survey](reports/survey-about-reinforcement-learning-for-llm-reasoning.md) | 26 | 7 | 30.8 |
+| LLM agents and tool use | [Survey](reports/survey-about-llm-agents-and-tool-use.md) | 21 | 6 | 8.0 |
+| Video and multimodal generation | [Survey](reports/survey-about-video-and-multimodal-generation.md) | 25 | 7 | 56.9 |
+| Efficient inference and small LMs | [Survey](reports/survey-about-efficient-inference-and-small-language-models.md) | 25 | 8 | 14.0 |
 
-## 2. Hệ thống làm gì
+- [LAB_REPORT.md](LAB_REPORT.md): tổng kết triển khai, kết quả thực nghiệm, đối chiếu rubric và reflection kỹ thuật bổ sung.
+- [SUBMISSION_REVIEW.md](SUBMISSION_REVIEW.md): kiểm tra trước khi nộp và 25 nguồn mẫu.
+- [SUBMISSION_MANIFEST.json](SUBMISSION_MANIFEST.json): SHA-256 của 15 artifact để đối chiếu tính toàn vẹn.
+- [ARCHITECTURE.md](ARCHITECTURE.md): giải thích kiến trúc, kỹ thuật và giới hạn.
+- [RUBRIC.md](RUBRIC.md), [GUIDE.md](GUIDE.md), [REPORT_TEMPLATE.md](REPORT_TEMPLATE.md): yêu cầu của đề bài.
+
+## Kiến trúc
 
 ```mermaid
 flowchart TD
-    U["python research.py &quot;survey about world model&quot;"] --> S["open_sandbox() - Daytona"]
-    S --> L["Lead agent: write_todos, chia N câu hỏi con"]
-    L -->|task x N, song song| R["researcher subagents"]
-    R --> T1["arxiv_search"]
-    R --> T2["hf_daily_papers / hf_search_papers"]
-    R --> T3["web_search / web_fetch (Exa MCP)"]
-    R --> N["ghi chú trong sandbox: /tmp/work/research/notes"]
-    N --> M["Lead gộp: sources.json + report.md"]
-    M --> F["execute: finalize_citations.py (có sẵn)"]
-    F --> V["execute: check_citations.py"]
-    V --> C["citation-checker subagent kiểm tra mẫu"]
-    C --> D["download -> reports/slug.md, .sources.json, .meta.json"]
+    CLI[research.py: chủ đề] --> LEAD[Lead: lập kế hoạch và task]
+    LEAD --> R[Researcher subagents]
+    R --> TOOLS[Tool trên host: arXiv / HF / Exa MCP]
+    TOOLS --> NOTES[Ghi chú trong sandbox]
+    NOTES --> LEAD
+    LEAD --> BODY[report.md + sources.json]
+    BODY --> FIN[Finalizer + chuẩn hóa ID + validator]
+    LEAD --> CHECK[Citation-checker kiểm tra mẫu]
+    CHECK --> LEAD
+    FIN --> OUT[Download reports/]
 ```
 
-Nguồn dữ liệu:
+Tool mạng và khóa API ở host; sandbox chỉ lưu file và chạy mã. Nội dung nguồn được coi là dữ liệu không đáng tin. Lead tổng hợp theo chủ đề, rồi mã Python tạo References và kiểm tra trích dẫn. Sandbox được dọn khi thoát khối `with`, kể cả khi lỗi.
 
-| Nguồn | Dùng để |
-|---|---|
-| arXiv API `https://export.arxiv.org/api/query` | Tìm bài theo từ khóa, sắp theo ngày |
-| Hugging Face Daily Papers `/api/daily_papers` | Bài đang "trending": upvotes, githubRepo, summary |
-| Hugging Face papers search `/api/papers/search?q=` | Tìm bài theo chủ đề |
-| Web qua Exa MCP (`web_search_exa`, `web_fetch_exa`) | Blog, survey, trang dự án, nội dung đầy đủ của một URL |
+## Cài đặt
 
-## 3. Cấu trúc thư mục
+Python 3.11+; môi trường kiểm chứng của bài là Python 3.11.9. Cài dependencies trong venv riêng của repo.
 
-```
-Lab/
-├── README.md  GUIDE.md  RUBRIC.md  REPORT_TEMPLATE.md   tài liệu
-├── topics.md                 5 chủ đề cần chạy
-├── requirements.txt  .env.example  .gitignore
-├── model.py                  CÓ SẴN - không sửa: tạo mô hình LLM từ biến môi trường
-├── sandbox.py                CÓ SẴN - không sửa: sandbox Daytona (hoặc Docker), upload, download
-├── self_check.py             CÓ SẴN - không sửa: tự kiểm tra trước khi nộp (python self_check.py)
-├── finalize_citations.py     CÓ SẴN - không sửa: script chạy trong sandbox, tự sinh `## References` và đánh số lại trích dẫn
-├── tools.py                  SINH VIÊN CÀI ĐẶT: retry + 5 công cụ nguồn dữ liệu
-├── agents.py                 SINH VIÊN CÀI ĐẶT: prompt, subagent, lead agent
-├── research.py               SINH VIÊN CÀI ĐẶT: script chính
-├── check_citations.py        SINH VIÊN CÀI ĐẶT: kiểm tra trích dẫn, chạy TRONG sandbox
-└── reports/                  báo cáo sinh ra (bạn commit vào repo nộp)
+Windows PowerShell:
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-Mỗi tệp "SINH VIÊN CÀI ĐẶT" là **pseudo-code chạy được** (import được): các hàm có docstring mô tả việc cần làm, các `TODO n` đánh số theo `GUIDE.md`, thân hàm đang `raise NotImplementedError`.
-
-## 4. Cài đặt
+Linux/macOS:
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate      # Python 3.11+
-pip install -r requirements.txt
-cp .env.example .env                                     # rồi điền khóa CỦA BẠN
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+cp .env.example .env
 ```
 
-Bạn cần ba loại khóa (điền vào `.env`, **không bao giờ commit** `.env`):
+Chỉ sao chép `.env.example` khi chưa có `.env`; giữ cấu hình hiện có nếu đã cài. Điền:
 
-| Khóa | Lấy ở đâu | Ghi chú |
-|---|---|---|
-| LLM (`LAB_MODEL` + khóa nhà cung cấp) | Nhà cung cấp bạn chọn (OpenAI, Anthropic, Google, OpenRouter, Ollama...) | Mô hình **phải hỗ trợ tool calling**. Chép tên mô hình từ tài liệu của nhà cung cấp. |
-| `DAYTONA_API_KEY` | https://app.daytona.io | Kiểm tra gói miễn phí / credit hiện hành. Không có tài khoản hoặc hết credit: đặt `SANDBOX=docker` để chạy sandbox trong container Docker cục bộ (xem `.env.example`). |
-| `EXA_API_KEY` (khuyến nghị) | https://dashboard.exa.ai/api-keys | Có thể chạy không khóa, nhưng bản miễn phí của MCP bị giới hạn tốc độ rất nhanh. |
+- LLM hỗ trợ tool calling: `LAB_MODEL` và khóa provider; hoặc `LAB_BASE_URL`, `LAB_MODEL`, `LAB_API_KEY` cho endpoint tương thích OpenAI.
+- `DAYTONA_API_KEY` để dùng Daytona. Hoặc `SANDBOX=docker` khi có Docker đang chạy; image phải có Python và bash.
+- `EXA_API_KEY` để tìm/đọc web qua Exa MCP.
 
-## 5. Làm bài
+Các lần chạy đã nộp dùng `deepseek/deepseek-flash`; endpoint và khóa không đưa vào repo. `.env`, `.venv` đã được gitignore. Không cần các khóa để đọc báo cáo hay chạy unit test/self-check.
 
-Làm theo thứ tự (chi tiết trong `GUIDE.md`):
+## Chạy
 
-1. `check_citations.py`: khởi động nhẹ, thuần Python.
-2. `tools.py`: viết `with_retry` và 5 công cụ. Thử riêng từng công cụ: `python tools.py`.
-3. `agents.py`: viết prompt, subagent và lead agent.
-4. `research.py`: ghép tất cả; chạy một chủ đề:
-
-```bash
-python research.py "survey about world model"
+```powershell
+.\.venv\Scripts\python.exe research.py "survey about world model"
 ```
 
-Kết quả nằm ở `reports/survey-about-world-model.md` cùng `.sources.json` và `.meta.json`.
+CLI in `[tool] <tên>` để theo dõi thao tác, rồi in đường dẫn báo cáo khi thành công. Lỗi trả exit code 1; thiếu chủ đề trả 2. Không thêm số thứ tự chủ đề vào cuối lệnh.
 
-## 6. Chủ đề và nộp bài
+Chạy cả 5 chủ đề (có chi phí LLM/API, chỉ cần khi muốn tái tạo):
 
-- Chạy đủ **5 chủ đề** trong [`topics.md`](topics.md), mỗi chủ đề một lần.
-- Commit mã nguồn và toàn bộ `reports/`, đẩy lên một **public repo** GitHub và nộp link.
-- Kiểm tra trước khi nộp: chạy **`python self_check.py`** (không tốn token): nó kiểm tra đủ 5 báo cáo, `meta.json`, trích dẫn bằng `check_citations.py` của bạn, và không có `.env`/khóa nào trong git.
-- Cách chấm: xem [`RUBRIC.md`](RUBRIC.md).
+```powershell
+$topics = Get-Content topics.md | Where-Object { $_ -match '^\d+\. ' } | ForEach-Object { $_ -replace '^\d+\. ', '' }
+foreach ($topic in $topics) {
+    & .\.venv\Scripts\python.exe research.py $topic
+    if ($LASTEXITCODE -ne 0) { throw "Research failed: $topic" }
+}
+```
 
-## 7. Thời gian, chi phí và an toàn
+## Kiểm tra
 
-- Dùng một mô hình **rẻ nhưng hỗ trợ tool calling**, và **đặt giới hạn** (số lần gọi mô hình/công cụ cho lead và subagent, `recursion_limit`): một prompt hỏng có thể khiến agent lặp rất lâu. Đây là hạng mục 2.5 của `RUBRIC.md`.
-- Kết quả có tính ngẫu nhiên: cùng một mã có thể cho báo cáo hợp lệ ở lần này và trích dẫn lỗi ở lần sau. Hãy sửa **prompt và mã**, không sửa tay báo cáo.
+```powershell
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe self_check.py
+.\.venv\Scripts\python.exe check_citations.py reports\survey-about-world-model.md reports\survey-about-world-model.sources.json
+```
 
-- Mỗi lần chạy tốn token LLM và thời gian sandbox. `tokens` trong `meta.json` chỉ đếm tin nhắn của lead, chưa gồm subagent, nên chi phí thật cao hơn. `open_sandbox()` luôn dừng và xóa sandbox khi kết thúc, kể cả khi lỗi. Đừng bỏ qua nó.
-- **Không đưa bí mật vào sandbox.** Sandbox không ngăn được prompt injection hay việc đẩy dữ liệu ra mạng; một trang web độc hại có thể khiến agent chạy lệnh bên trong sandbox. Vì vậy mọi công cụ gọi mạng và mọi khóa ở lại phía host.
-- Nội dung lấy từ web là **dữ liệu không đáng tin**: agent không được làm theo chỉ dẫn nằm trong đó.
+Ba lệnh kiểm tra cuối không gọi LLM. `python tools.py` gọi 5 nguồn thật nếu muốn kiểm tra kết nối. Với Linux/macOS, dùng `.venv/bin/python` và đường dẫn `/` tương ứng.
+
+## Đọc reports/
+
+Mỗi chủ đề có ba file cùng tên gốc:
+
+- `.md`: survey tiếng Anh; TL;DR, Background, 3–6 themes, Trends and open problems, References.
+- `.sources.json`: danh sách `{n, id, url, title, date, source}`. `source` là công cụ phát hiện tài liệu, không phải tên miền của URL.
+- `.meta.json`: chủ đề, model, thời gian, số task/tool, số nguồn, họ nguồn và token của lead.
+
+`hf-daily` và `hf-search` là hai nhãn theo rubric dù cùng nền tảng HF. `subagent_calls` đếm tất cả task của lead, gồm researcher và citation-checker. Token metadata chưa gồm subagent; không dùng số đó làm tổng chi phí tiền.
+
+## File triển khai và giới hạn
+
+`tools.py`, `agents.py`, `research.py`, `check_citations.py` là phần cài đặt. `model.py`, `sandbox.py`, `self_check.py`, `finalize_citations.py` giữ nguyên bản đề.
+
+Lead bị giới hạn 150 model calls / 300 tool calls / 12 task calls; researcher 40/60, checker 15/20; recursion_limit của lead là 1000. Đây là giới hạn lượt gọi, không phải giới hạn token hoặc thời gian. Lần chạy dài nhất trong bộ nộp mất khoảng 57 phút.
+
+Validator kiểm tra cấu trúc và ID–URL; kiểm tra mẫu không chứng minh mọi câu đều đúng. Không sửa tay báo cáo đã tải về. Chuẩn hóa ID tương đương và tái tạo References chạy trong sandbox bằng `check_citations.py --normalize`, trước khi xuất. ID trỏ sang bài khác vẫn bị từ chối. Các artifact nộp giữ nguyên bytes hiện có; `.gitattributes` ngăn git đổi line endings của chúng.

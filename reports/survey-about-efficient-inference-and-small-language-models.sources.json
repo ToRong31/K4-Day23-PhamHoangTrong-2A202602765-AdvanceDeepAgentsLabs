@@ -1,0 +1,202 @@
+[
+  {
+    "n": 1,
+    "id": "2208.07339",
+    "url": "https://arxiv.org/abs/2208.07339",
+    "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+    "date": "2022-08-15",
+    "source": "arxiv"
+  },
+  {
+    "n": 2,
+    "id": "2211.10438",
+    "url": "https://arxiv.org/abs/2211.10438",
+    "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+    "date": "2022-11-18",
+    "source": "arxiv"
+  },
+  {
+    "n": 3,
+    "id": "2610.03027",
+    "url": "https://arxiv.org/abs/2610.03027",
+    "title": "Tailoring the Quantization Space for 1-Bit KV Cache Compression",
+    "date": "2026-10-02",
+    "source": "arxiv"
+  },
+  {
+    "n": 4,
+    "id": "2210.17323",
+    "url": "https://arxiv.org/abs/2210.17323",
+    "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+    "date": "2022-10-31",
+    "source": "arxiv"
+  },
+  {
+    "n": 5,
+    "id": "2306.00978",
+    "url": "https://arxiv.org/abs/2306.00978",
+    "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+    "date": "2023-06-01",
+    "source": "arxiv"
+  },
+  {
+    "n": 6,
+    "id": "2309.06180",
+    "url": "https://arxiv.org/abs/2309.06180",
+    "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+    "date": "2023-09-12",
+    "source": "arxiv"
+  },
+  {
+    "n": 7,
+    "id": "https://blog.vllm.ai/2023/06/20/vllm.html",
+    "url": "https://blog.vllm.ai/2023/06/20/vllm.html",
+    "title": "vLLM: Easy, Fast, and Cheap LLM Serving with PagedAttention",
+    "date": "2023-06-20",
+    "source": "web"
+  },
+  {
+    "n": 8,
+    "id": "2211.17192",
+    "url": "https://arxiv.org/abs/2211.17192",
+    "title": "Fast Inference from Transformers via Speculative Decoding",
+    "date": "2022-11-30",
+    "source": "arxiv"
+  },
+  {
+    "n": 9,
+    "id": "2503.01840",
+    "url": "https://arxiv.org/abs/2503.01840",
+    "title": "EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test",
+    "date": "2025-03-03",
+    "source": "arxiv"
+  },
+  {
+    "n": 10,
+    "id": "2205.14135",
+    "url": "https://arxiv.org/abs/2205.14135",
+    "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+    "date": "2022-05-27",
+    "source": "arxiv"
+  },
+  {
+    "n": 11,
+    "id": "2410.20011",
+    "url": "https://huggingface.co/papers/2410.20011",
+    "title": "A Survey of Small Language Models",
+    "date": "2024-10-25",
+    "source": "hf-search"
+  },
+  {
+    "n": 12,
+    "id": "2305.07759",
+    "url": "https://huggingface.co/papers/2305.07759",
+    "title": "TinyStories: How Small Can Language Models Be and Still Speak Coherent English?",
+    "date": "2023-05-12",
+    "source": "hf-search"
+  },
+  {
+    "n": 13,
+    "id": "2410.03083",
+    "url": "https://huggingface.co/papers/2410.03083",
+    "title": "Scaling Parameter-Constrained Language Models with Quality Data",
+    "date": "2024-10-04",
+    "source": "hf-search"
+  },
+  {
+    "n": 14,
+    "id": "2603.02156",
+    "url": "https://arxiv.org/abs/2603.02156",
+    "title": "How Small Can 6G Reason? Scaling Tiny Language Models for AI-Native Networks",
+    "date": "2026-03-02",
+    "source": "arxiv"
+  },
+  {
+    "n": 15,
+    "id": "2404.14219",
+    "url": "https://arxiv.org/abs/2404.14219",
+    "title": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+    "date": "2024-04-22",
+    "source": "arxiv"
+  },
+  {
+    "n": 16,
+    "id": "2025.emnlp-main.1659",
+    "url": "https://aclanthology.org/2025.emnlp-main.1659.pdf",
+    "title": "THINKSLM: Towards Reasoning in Small Language Models",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 17,
+    "id": "2501.12975",
+    "url": "https://arxiv.org/abs/2501.12975",
+    "title": "OnionEval: An Unified Evaluation of Fact-conflicting Hallucination for Small-Large Language Models",
+    "date": "2025-01-22",
+    "source": "web"
+  },
+  {
+    "n": 18,
+    "id": "1910.01108",
+    "url": "https://huggingface.co/papers/1910.01108",
+    "title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",
+    "date": "2019-10-02",
+    "source": "hf-search"
+  },
+  {
+    "n": 19,
+    "id": "2502.19008",
+    "url": "https://arxiv.org/abs/2502.19008",
+    "title": "Binary Neural Networks for Large Language Model: A Survey",
+    "date": "2025-02-26",
+    "source": "arxiv"
+  },
+  {
+    "n": 20,
+    "id": "2402.17764",
+    "url": "https://huggingface.co/papers/2402.17764",
+    "title": "The Era of 1-bit LLMs: All Large Language Models are in 1.58 Bits",
+    "date": "2024-02-27",
+    "source": "hf-daily"
+  },
+  {
+    "n": 21,
+    "id": "2606.16140",
+    "url": "https://arxiv.org/abs/2606.16140",
+    "title": "VibeThinker-3B: Exploring the Frontier of Verifiable Reasoning in Small Language Models",
+    "date": "2026-06-15",
+    "source": "arxiv"
+  },
+  {
+    "n": 22,
+    "id": "2411.09944",
+    "url": "https://huggingface.co/papers/2411.09944",
+    "title": "SlimLM: An Efficient Small Language Model for On-Device Document Assistance",
+    "date": "2024-11-15",
+    "source": "hf-search"
+  },
+  {
+    "n": 23,
+    "id": "2607.08032",
+    "url": "https://arxiv.org/abs/2607.08032",
+    "title": "What to Keep, What to Forget: A Rate-Distortion View of Memory Compaction in LLMs and Agents",
+    "date": "2026-07-09",
+    "source": "arxiv"
+  },
+  {
+    "n": 24,
+    "id": "https://github.com/ggml-org/llama.cpp",
+    "url": "https://github.com/ggml-org/llama.cpp",
+    "title": "ggml-org/llama.cpp: LLM inference in C/C++",
+    "date": "unknown",
+    "source": "web"
+  },
+  {
+    "n": 25,
+    "id": "2409.17481",
+    "url": "https://huggingface.co/papers/2409.17481",
+    "title": "MaskLLM: Learnable Semi-Structured Sparsity for Large Language Models",
+    "date": "2024-09-26",
+    "source": "hf-search"
+  }
+]

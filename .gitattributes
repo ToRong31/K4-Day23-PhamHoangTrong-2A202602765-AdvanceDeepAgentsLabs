@@ -1,0 +1,4 @@
+# Preserve downloaded submission artifacts byte for byte.
+reports/*.md -text
+reports/*.sources.json -text
+reports/*.meta.json -text
