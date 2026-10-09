@@ -1,7 +1,7 @@
 # Báo cáo tổng kết thực hành Deep Research Agent
 
 **Sinh viên:** Phạm Hoàng Trọng — 2A202602765.
-**Ngày kiểm tra:** 09/10/2026 (Asia/Saigon).
+**Ngày kiểm tra:** 09/10/2026.
 **Bài:** thực hành cá nhân Advanced Deep Agents; yêu cầu theo [RUBRIC.md](RUBRIC.md).
 
 ## 1. Mục tiêu và phạm vi
